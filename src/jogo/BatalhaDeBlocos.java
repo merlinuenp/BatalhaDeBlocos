@@ -110,10 +110,10 @@ public class BatalhaDeBlocos extends Application {
     }
 
     private void atirar(Bloco quem) {
-        Bloco s = new Bloco((int) quem.getTranslateX() + 20,
+        Bloco bloco = new Bloco((int) quem.getTranslateX() + 20,
                 (int) quem.getTranslateY(), 5, 20, "tiro" + quem.tipo, Color.BLACK);
 
-        raiz.getChildren().add(s);
+        raiz.getChildren().add(bloco);
     }
 
     @Override
