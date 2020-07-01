@@ -13,16 +13,16 @@ import static javafx.application.Application.launch;
 
 public class BatalhaDeBlocos extends Application {
 
-    private Pane raiz = new Pane();
+    private Pane tela = new Pane();
 
     private double t = 0;
 
     private Bloco jogador = new Bloco(300, 550, 40, 40, "jogador", Color.BLUE);
 
     private Parent createContent() {
-        raiz.setPrefSize(600, 600);
+        tela.setPrefSize(600, 600);
 
-        raiz.getChildren().add(jogador);
+        tela.getChildren().add(jogador);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -35,20 +35,20 @@ public class BatalhaDeBlocos extends Application {
 
         proximoNivel();
 
-        return raiz;
+        return tela;
     }
 
     private void proximoNivel() {
         for (int i = 0; i < 5; i++) {
             Bloco p = new Bloco(90 + i * 100, 150, 30, 30, "inimigo", Color.RED);
-            raiz.getChildren().add(p);
+            tela.getChildren().add(p);
         }
     }
 
     // Versão convencional
     private List<Bloco> personagens() {
         List<Bloco> lista = new ArrayList();
-        for(Object o : raiz.getChildren()){
+        for(Object o : tela.getChildren()){
             lista.add((Bloco)o);
         }
         return lista;
@@ -57,7 +57,7 @@ public class BatalhaDeBlocos extends Application {
     
     // Versão funcional
 //    private List<Personagem> personagens() {
-//        return raiz.getChildren().stream().map(n -> (Bloco) n).collect(Collectors.toList());
+//        return tela.getChildren().stream().map(n -> (Bloco) n).collect(Collectors.toList());
 //    }
 
     private void atualizarTela() {
@@ -98,7 +98,7 @@ public class BatalhaDeBlocos extends Application {
             }
         });
 
-        raiz.getChildren().removeIf(n -> {
+        tela.getChildren().removeIf(n -> {
             Bloco s = (Bloco) n;
             return s.morto;
         });
@@ -113,7 +113,7 @@ public class BatalhaDeBlocos extends Application {
         Bloco bloco = new Bloco((int) quem.getTranslateX() + 20,
                 (int) quem.getTranslateY(), 5, 20, "tiro" + quem.tipo, Color.BLACK);
 
-        raiz.getChildren().add(bloco);
+        tela.getChildren().add(bloco);
     }
 
     @Override
@@ -129,9 +129,7 @@ public class BatalhaDeBlocos extends Application {
                     jogador.moverParaDireita();
                     break;
                 case SPACE:
-                    if(!jogador.morto){
-                        atirar(jogador);
-                    }             
+                    atirar(jogador);             
                     break;
             }
         });
